@@ -22,10 +22,8 @@ class PrototypesController < ApplicationController
   def show
     @prototype = Prototype.find_by(id: params[:id])
     if @prototype.nil?
-      # @prototypeが存在しない場合、ここで処理を終了してリダイレクト
       redirect_to root_path, alert: "指定された投稿は存在しません。"
     else
-      # @prototypeが存在する場合のみ、@commentを生成
       @comment = Comment.new
     end
   end
@@ -56,7 +54,7 @@ end
 private
 
 def prototype_params
-  params.require(:prototype).permit(:title, :catch_copy, :concept, :image)
+  params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
 end
 
 def set_prototype
