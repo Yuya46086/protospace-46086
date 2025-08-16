@@ -1,6 +1,6 @@
 <div class="card">
   <%= link_to prototype_path(prototype) do %>
-    <%= image_tag prototype.image, class: "card__img" if prototype.image.attached? %>
+    <%= image_tag prototype.image.variant(resize: '500x500'), class: "card__img" if prototype.image.attached? %>
   <% end %>
   <div class="card__body">
     <%= link_to prototype.title, prototype_path(prototype), class: :card__title%>
