@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   def create
-    @comment = Comment.new(comment_params.merge(user_id: current_user.id, prototype_id: params[:prototype_id]))
+    @prototype = Prototype.find(params[:prototype_id])
+    @comment = Comment.new(comment_params.merge(user_id: current_user.id, prototype_id: @prototype.id))
     if @comment.save
       redirect_to prototype_path(@comment.prototype)
     else
